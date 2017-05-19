@@ -1,0 +1,14 @@
+localhost ansible_connection=local local_release_dir={{ansible_env.HOME}}/releases
+
+[kube-master]
+localhost
+
+[etcd]
+localhost
+
+[kube-node]
+localhost
+
+[k8s-cluster:children]
+kube-node
+kube-master

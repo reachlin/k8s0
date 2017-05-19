@@ -1,0 +1,4 @@
+---
+
+- name: "Check docker"
+  command: "docker --version"

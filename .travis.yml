@@ -1,0 +1,14 @@
+language: python
+python: "2.7"
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get install -y systemd python-netaddr python-apt
+  - sudo pip install ansible
+
+script:
+  - sudo ansible-playbook -i inventory/local test.yml
