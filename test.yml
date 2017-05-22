@@ -4,6 +4,6 @@
   roles:
     - role: check
 
-- hosts: etcd-server
+- hosts: k8s-cluster
   roles:
-    - role: etcd
+    - role: k8s
