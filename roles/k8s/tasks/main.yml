@@ -1,0 +1,42 @@
+---
+
+- name: "Copy docker hyperkube image"
+  copy:
+    src: "{{ playbook_dir }}/images/hyperkube.{{ hyperkube_version }}.tar"
+    dest: "{{ stage_dir }}/hyperkube.{{ hyperkube_version }}.tar"
+
+- name: "Import docker hyperkube image"
+  command: "docker load --input {{ stage_dir }}/hyperkube.{{ hyperkube_version }}.tar"
+
+- name: "Make kubelet config dir"
+  file:
+    path: "{{ kubelet_config_dir }}/cert"
+    state: directory
+    mode: 0755
+
+- name: "Copy k8s cert"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ kubelet_config_dir }}/cert/"
+  with_items:
+    - ca.pem
+    - client.key
+    - client.pem
+
+- name: "Create kubelet config file"
+  template:
+    src: node-kubeconfig.yml.j2
+    dest: {{ kubelet_config_dir }}/node-kubeconfig.yml
+
+- name: "Run kubelet"
+  command: >
+    docker run --net=host
+    --net=host
+    --name {{ kubelet_container_name }}
+    --privileged
+    -v /var/run/docker.sock:/var/run/docker.sock
+    -v {{ kubelet_config_dir }}:{{ kubelet_config_dir }}
+    -d
+    hyperkube:{{ hyperkube_version }} kubelet
+    --kubeconfig={{ kubelet_config_dir }}/node-kubeconfig.yml
+

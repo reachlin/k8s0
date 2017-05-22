@@ -1,0 +1,3 @@
+hyperkube_version: v1.6.4
+kubelet_container_name: kubelet
+kubelet_config_dir: /etc/k8s
