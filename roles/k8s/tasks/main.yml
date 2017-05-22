@@ -26,7 +26,7 @@
 - name: "Create kubelet config file"
   template:
     src: node-kubeconfig.yml.j2
-    dest: {{ kubelet_config_dir }}/node-kubeconfig.yml
+    dest: "{{ kubelet_config_dir }}/node-kubeconfig.yml"
 
 - name: "Run kubelet"
   command: >
