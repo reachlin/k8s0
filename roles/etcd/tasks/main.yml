@@ -1,0 +1,22 @@
+---
+
+- name: "Copy docker etcd image"
+  copy:
+    src: "{{ playbook_dir }}/images/etcd.{{ etcd_version }}.tar"
+    dest: "{{ stage_dir }}/{{ etcd_version }}.tar"
+
+- name: "Import docker etcd image"
+  command: "docker load --input {{ stage_dir }}/etcd.{{ etcd_version }}.tar"
+
+- name: "Run etcd"
+  command: >
+    docker run --net=host
+    --name {{ etcd_container_name }}
+    -d
+    etcd:{{ etcd_version }}
+    /usr/local/bin/etcd
+    --name {{ inventory_hostname }}
+    --initial-advertise-peer-urls http://0.0.0.0:2380 --listen-peer-urls http://0.0.0.0:2380
+    --advertise-client-urls http://0.0.0.0:2379 --listen-client-urls http://0.0.0.0:2379
+    --initial-cluster {{ inventory_hostname }}=http://0.0.0.0:2380
+    --initial-cluster-state new

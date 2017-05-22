@@ -2,3 +2,9 @@
 
 - name: "Check docker"
   command: "docker --version"
+
+- name: "Make stage dir "
+  file:
+    path: "{{ stage_dir }}"
+    state: directory
+    mode: 0755

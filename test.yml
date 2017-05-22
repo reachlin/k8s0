@@ -3,3 +3,7 @@
 - hosts: k8s-cluster
   roles:
     - role: check
+
+- hosts: etcd-server
+  roles:
+    - role: etcd

@@ -1,9 +1,12 @@
-localhost ansible_connection=local local_release_dir={{ansible_env.HOME}}/releases
+localhost ansible_connection=local stage_dir={{ansible_env.HOME}}/stage
+
+[registry]
+localhost
 
 [kube-master]
 localhost
 
-[etcd]
+[etcd-server]
 localhost
 
 [kube-node]
