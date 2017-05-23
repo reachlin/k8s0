@@ -6,4 +6,4 @@
   register: result
   until: result.status == 200
   retries: 3
-  delay: 6
+  delay: 9
