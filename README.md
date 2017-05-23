@@ -8,7 +8,15 @@ For now, only support ubuntu 16.04 with docker and ansible installed.
 
 ## Usage
 
-check .travis.yml
+```
+# pull images and put into ./images folder
+ansible-playbook -i inventory/local images.yml
+
+# start kubernetes on localhost
+ansible-playbook -i inventory/local test.yml
+```
+
+Check .travis.yml for more details.
 
 ## Features
 
