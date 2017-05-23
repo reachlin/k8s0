@@ -45,6 +45,7 @@
   command: >
     docker run --net=host
     --net=host
+    --pid=host
     --name {{ kubelet_container_name }}
     --privileged
     -v /var/run/docker.sock:/var/run/docker.sock
