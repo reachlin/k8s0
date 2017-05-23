@@ -12,6 +12,8 @@ check .travis.yml
 
 ## Features
 
+* Minimal kubernetes on travis for DevOps.
+
 * Include a local registry or repo, so k8s can be deployed without an internet connection.
 
 ## Dev. Notes
