@@ -8,6 +8,14 @@
 - name: "Import docker hyperkube image"
   command: "docker load --input {{ stage_dir }}/hyperkube.{{ hyperkube_version }}.tar"
 
+- name: "Copy docker pause image"
+  copy:
+    src: "{{ playbook_dir }}/images/pause-amd64.{{ pause_version }}.tar"
+    dest: "{{ stage_dir }}/pause-amd64.{{ pause_version }}.tar"
+
+- name: "Import docker pause image"
+  command: "docker load --input {{ stage_dir }}/pause-amd64.{{ pause_version }}.tar"
+
 - name: "Make kubelet certificates dir"
   file:
     path: "{{ kubelet_config_dir }}/cert"
@@ -55,4 +63,5 @@
     --kubeconfig=/etc/kubernetes/node-kubeconfig.yml
     --allow-privileged=true
     --pod-manifest-path=/etc/kubernetes/manifests
+    --pod-infra-container-image=pause-amd64:{{ pause_version }}
 
