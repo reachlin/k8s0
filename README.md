@@ -6,6 +6,12 @@ This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guide
 
 So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps.
 
+*** Still On Going ***
+
+Current status: installed etcd, kubelet, and api server
+
+**********************
+
 ## Prerequisites
 
 For now, only support ubuntu 16.04 with docker and ansible installed.
