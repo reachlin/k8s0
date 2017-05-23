@@ -66,3 +66,5 @@
     --pod-manifest-path=/etc/kubernetes/manifests
     --pod-infra-container-image=pause-amd64:{{ pause_version }}
 
+- name: Copy kubectl from hyperkube container
+  command: "docker run --rm -v /usr/local/bin:/systembindir hyperkube:{{ hyperkube_version }} /bin/cp /hyperkube /systembindir/kubectl"
