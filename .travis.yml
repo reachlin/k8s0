@@ -13,4 +13,4 @@ before_install:
 script:
   - ansible-playbook -i inventory/local images.yml
   - sudo ansible-playbook -i inventory/local test.yml
-  - kubectl get pods -n kube-system
+  - docker ps
