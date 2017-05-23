@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - name: kube-apiserver
+    image: "hyperkube:{{ hyperkube_version }}"
+    imagePullPolicy: IfNotPresent
+    command:
+    - /hyperkube
+    - apiserver
+    - --bind-address=0.0.0.0
+    - --insecure-bind-address=127.0.0.1
+    - --storage-backend=etcd3
+    - --etcd-servers=http://127.0.0.1:2379
+    - --allow-privileged=true
+    - --service-cluster-ip-range=172.20.0.0/16
+    - --secure-port=8443
+    - --insecure-port=8080
+    - --advertise-address=0.0.0.0
+    - --tls-cert-file=/etc/kubernetes/cert/server.crt
+    - --tls-private-key-file=/etc/kubernetes/cert/server.key
+    - --client-ca-file=/etc/kubernetes/cert/ca.crt
+    ports:
+    - containerPort: 8443
+      hostPort: 8443
+      name: https
+    - containerPort: 8080
+      hostPort: 8080
+      name: local
+    volumeMounts:
+    - mountPath: /etc/kubernetes
+      name: kubernetes-config
+      readOnly: true
+    - mountPath: /etc/kubernetes/cert
+      name: kubernetes-certs
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: {{ kubelet_config_dir }}
+    name: kubernetes-config
+  - hostPath:
+      path: {{ kubelet_config_dir }}/cert
+    name: kubernetes-certs

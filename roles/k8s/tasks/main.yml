@@ -8,9 +8,15 @@
 - name: "Import docker hyperkube image"
   command: "docker load --input {{ stage_dir }}/hyperkube.{{ hyperkube_version }}.tar"
 
-- name: "Make kubelet config dir"
+- name: "Make kubelet certificates dir"
   file:
     path: "{{ kubelet_config_dir }}/cert"
+    state: directory
+    mode: 0755
+
+- name: "Make kubelet static pods dir"
+  file:
+    path: "{{ kubelet_config_dir }}/manifests"
     state: directory
     mode: 0755
 
@@ -19,14 +25,21 @@
     src: "{{ item }}"
     dest: "{{ kubelet_config_dir }}/cert/"
   with_items:
-    - ca.pem
-    - client.key
-    - client.pem
+    - ca.crt
+    - kubelet.key
+    - kubelet.crt
+    - server.key
+    - server.crt
 
 - name: "Create kubelet config file"
   template:
     src: node-kubeconfig.yml.j2
     dest: "{{ kubelet_config_dir }}/node-kubeconfig.yml"
+
+- name: "Create apiserver yml"
+  template:
+    src: apiserver.yml.j2
+    dest: "{{ kubelet_config_dir }}/manifests/apiserver.yml"
 
 - name: "Run kubelet"
   command: >
@@ -35,8 +48,10 @@
     --name {{ kubelet_container_name }}
     --privileged
     -v /var/run/docker.sock:/var/run/docker.sock
-    -v {{ kubelet_config_dir }}:{{ kubelet_config_dir }}
+    -v {{ kubelet_config_dir }}:/etc/kubernetes
     -d
     hyperkube:{{ hyperkube_version }} kubelet
-    --kubeconfig={{ kubelet_config_dir }}/node-kubeconfig.yml
+    --kubeconfig=/etc/kubernetes/node-kubeconfig.yml
+    --allow-privileged=true
+    --pod-manifest-path=/etc/kubernetes/manifests
 

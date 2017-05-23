@@ -1,3 +1,4 @@
+system_namespace: kube-system
 hyperkube_version: v1.6.4
 kubelet_container_name: kubelet
 kubelet_config_dir: "{{ ansible_env.HOME }}/k8s"
