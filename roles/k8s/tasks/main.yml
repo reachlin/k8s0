@@ -56,8 +56,9 @@
     --pid=host
     --name {{ kubelet_container_name }}
     --privileged
-    -v /var/run/docker.sock:/var/run/docker.sock
+    -v /var/run:/var/run
     -v {{ kubelet_config_dir }}:/etc/kubernetes
+    -v /etc/resolv.conf:/etc/resolv.conf 
     -d
     hyperkube:{{ hyperkube_version }} kubelet
     --kubeconfig=/etc/kubernetes/node-kubeconfig.yml
