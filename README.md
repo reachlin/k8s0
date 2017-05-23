@@ -1,6 +1,10 @@
-# k8s0 [![Build Status](https://travis-ci.org/reachlin/k8s0.svg)][travis]
+# k8s0: Kubernetes Ground Zero [![Build Status](https://travis-ci.org/reachlin/k8s0.svg)][travis]
 
-kubernetes installation on a fixed configuration
+It's a kubernetes installation on a fixed configuration.
+
+This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/), but with the capability to run on Travis.
+
+So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps.
 
 ## Prerequisites
 
@@ -29,7 +33,8 @@ Check .travis.yml for more details.
 etcd: https://github.com/coreos/etcd/releases/
 k8s: https://kubernetes.io/docs/getting-started-guides/scratch/#cluster-naming
 
-### create certificates
+### Create certificates
+
 ```
 openssl genrsa -out ca.key 2048
 openssl req -x509 -new -nodes -key ca.key -subj "/CN=k8s0-ca" -days 99999 -out ca.crt -sha256

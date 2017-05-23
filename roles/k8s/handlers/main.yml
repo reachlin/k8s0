@@ -5,5 +5,5 @@
     url: http://localhost:8080/healthz
   register: result
   until: result.status == 200
-  retries: 3
-  delay: 9
+  retries: 4
+  delay: 12
