@@ -61,7 +61,7 @@
     -v /etc/resolv.conf:/etc/resolv.conf 
     -d
     hyperkube:{{ hyperkube_version }} kubelet
-    --api-servers=https://127.0.0.1:8443
+    --api-servers=http://127.0.0.1:8080
     --kubeconfig=/etc/kubernetes/node-kubeconfig.yml
     --allow-privileged=true
     --pod-manifest-path=/etc/kubernetes/manifests
