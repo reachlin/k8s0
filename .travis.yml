@@ -12,6 +12,6 @@ before_install:
 
 script:
   - ansible-playbook -i inventory/local images.yml
-  - sudo ansible-playbook -i inventory/local test.yml
+  - sudo ansible-playbook -i inventory/local site.yml
   - kubectl cluster-info
   - kubectl get nodes -a

@@ -16,7 +16,7 @@
     etcd:{{ etcd_version }}
     /usr/local/bin/etcd
     --name {{ inventory_hostname }}
-    --initial-advertise-peer-urls http://0.0.0.0:2380 --listen-peer-urls http://0.0.0.0:2380
-    --advertise-client-urls http://0.0.0.0:2379 --listen-client-urls http://0.0.0.0:2379
-    --initial-cluster {{ inventory_hostname }}=http://0.0.0.0:2380
+    --initial-advertise-peer-urls http://{{ k8s_ip }}:2380 --listen-peer-urls http://0.0.0.0:2380
+    --advertise-client-urls http://{{ k8s_ip }}:2379 --listen-client-urls http://0.0.0.0:2379
+    --initial-cluster {{ inventory_hostname }}=http://{{ k8s_ip }}:2380
     --initial-cluster-state new

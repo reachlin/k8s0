@@ -1,16 +1,16 @@
-localhost ansible_connection=local stage_dir={{ansible_env.HOME}}/stage
+node0 ansible_connection=local stage_dir={{ansible_env.HOME}}/stage k8s_ip=127.0.0.1
 
 [registry]
-localhost
+node0
 
 [kube-master]
-localhost
+node0
 
 [etcd-server]
-localhost
+node0
 
 [kube-node]
-localhost
+node0
 
 [k8s-cluster:children]
 kube-node

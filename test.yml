@@ -1,13 +1,7 @@
 ---
 
 - hosts: k8s-cluster
-  roles:
-    - role: check
-
-- hosts: etcd-server
-  roles:
-    - role: etcd
-
-- hosts: k8s-cluster
-  roles:
-    - role: k8s
+  tasks:
+  - name: debug
+    debug:
+      var: k8s_ip

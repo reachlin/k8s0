@@ -2,7 +2,7 @@
 
 - name: Master | wait for the apiserver to be running
   uri:
-    url: http://localhost:8080/healthz
+    url: http://127.0.0.1:8080/healthz
   register: result
   until: result.status == 200
   retries: 4

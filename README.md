@@ -23,7 +23,7 @@ For now, only support ubuntu 16.04 with docker and ansible installed.
 ansible-playbook -i inventory/local images.yml
 
 # start kubernetes on localhost
-ansible-playbook -i inventory/local test.yml
+ansible-playbook -i inventory/local site.yml
 ```
 
 Check .travis.yml for more details.
@@ -36,8 +36,16 @@ Check .travis.yml for more details.
 
 ## Dev. Notes
 
-etcd: https://github.com/coreos/etcd/releases/
-k8s: https://kubernetes.io/docs/getting-started-guides/scratch/#cluster-naming
+### Basic steps
+
+etcd -> kubelet -> api server as static pod
+
+### References
+
+* k8s install: https://kubernetes.io/docs/getting-started-guides/scratch/#software-binaries
+* kargo: https://github.com/kubernetes-incubator/kargo
+* etcd: https://github.com/coreos/etcd/releases/
+* k8s: https://kubernetes.io/docs/getting-started-guides/scratch/#cluster-naming
 
 ### Create certificates
 
