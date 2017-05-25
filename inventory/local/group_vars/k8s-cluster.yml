@@ -1,0 +1,17 @@
+kubelet_config_dir: "{{ ansible_env.HOME }}/k8s"
+
+etcd_version: v3.2.0-rc.0
+hyperkube_version: v1.6.4
+pause_version: 3.0
+
+kubelet_container_name: kubelet
+
+api_ip: 127.0.0.1
+api_port: 8080
+api_ssl_port: 8443
+
+etcd_ip: 127.0.0.1
+etcd_peer_port: 2380
+etcd_port: 2379
+
+service_cluster_ip_range: 172.20.0.0/16

@@ -15,21 +15,21 @@ spec:
     - --bind-address=0.0.0.0
     - --insecure-bind-address=127.0.0.1
     - --storage-backend=etcd3
-    - --etcd-servers=http://127.0.0.1:2379
+    - --etcd-servers=http://{{ etcd_ip }}:{{ etcd_port }}
     - --allow-privileged=true
-    - --service-cluster-ip-range=172.20.0.0/16
-    - --secure-port=8443
-    - --insecure-port=8080
-    - --advertise-address=127.0.0.1
+    - --service-cluster-ip-range={{ service_cluster_ip_range }}
+    - --secure-port={{ api_ssl_port }}
+    - --insecure-port={{ api_port }}
+    - --advertise-address={{ api_ip }}
     - --tls-cert-file=/etc/kubernetes/cert/server.crt
     - --tls-private-key-file=/etc/kubernetes/cert/server.key
     - --client-ca-file=/etc/kubernetes/cert/ca.crt
     ports:
-    - containerPort: 8443
-      hostPort: 8443
+    - containerPort: {{ api_ssl_port }}
+      hostPort: {{ api_ssl_port }}
       name: https
-    - containerPort: 8080
-      hostPort: 8080
+    - containerPort: {{ api_port }}
+      hostPort: {{ api_port }}
       name: local
     volumeMounts:
     - mountPath: /etc/kubernetes

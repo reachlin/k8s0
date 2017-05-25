@@ -1,0 +1,31 @@
+---
+
+- name: "Make kubelet static pods dir"
+  file:
+    path: "{{ kubelet_config_dir }}/manifests"
+    state: directory
+    mode: 0755
+
+- name: "Create kubelet config file"
+  template:
+    src: kubelet-config.yml.j2
+    dest: "{{ kubelet_config_dir }}/kubelet-config.yml"
+
+- name: "Run kubelet"
+  command: >
+    docker run --net=host
+    --net=host
+    --pid=host
+    --name {{ kubelet_container_name }}
+    --privileged
+    -v /var/run:/var/run
+    -v {{ kubelet_config_dir }}:/etc/kubernetes
+    -v /etc/resolv.conf:/etc/resolv.conf 
+    -d
+    hyperkube:{{ hyperkube_version }} kubelet
+    --kubeconfig=/etc/kubernetes/kubelet-config.yml
+    --allow-privileged=true
+    --pod-manifest-path=/etc/kubernetes/manifests
+    --pod-infra-container-image=pause-amd64:{{ pause_version }}
+    --cgroups-per-qos=false
+    --enforce-node-allocatable=""

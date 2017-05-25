@@ -1,0 +1,10 @@
+---
+
+- name: "Create apiserver yml"
+  template:
+    src: apiserver.yml.j2
+    dest: "{{ kubelet_config_dir }}/manifests/apiserver.yml"
+
+- name: "Check apiserver status"
+  command: "docker inspect {{ kubelet_container_name }}"
+  notify: Master | wait for the apiserver to be running

@@ -1,6 +1,6 @@
 ---
 
-- hosts: k8s-cluster
+- hosts: all
   roles:
     - role: check
 
@@ -11,3 +11,8 @@
 - hosts: k8s-cluster
   roles:
     - role: k8s
+    - role: kubelet
+
+- hosts: k8s-master
+  roles:
+    - role: apiserver

@@ -16,19 +16,13 @@
 - name: "Import docker pause image"
   command: "docker load --input {{ stage_dir }}/pause-amd64.{{ pause_version }}.tar"
 
-- name: "Make kubelet certificates dir"
+- name: "Make k8s certificates dir"
   file:
     path: "{{ kubelet_config_dir }}/cert"
     state: directory
     mode: 0755
 
-- name: "Make kubelet static pods dir"
-  file:
-    path: "{{ kubelet_config_dir }}/manifests"
-    state: directory
-    mode: 0755
-
-- name: "Copy k8s cert"
+- name: "Copy k8s certificates"
   copy:
     src: "{{ item }}"
     dest: "{{ kubelet_config_dir }}/cert/"
@@ -39,36 +33,5 @@
     - server.key
     - server.crt
 
-- name: "Create kubelet config file"
-  template:
-    src: node-kubeconfig.yml.j2
-    dest: "{{ kubelet_config_dir }}/node-kubeconfig.yml"
-
-- name: "Create apiserver yml"
-  template:
-    src: apiserver.yml.j2
-    dest: "{{ kubelet_config_dir }}/manifests/apiserver.yml"
-
-- name: "Run kubelet"
-  command: >
-    docker run --net=host
-    --net=host
-    --pid=host
-    --name {{ kubelet_container_name }}
-    --privileged
-    -v /var/run:/var/run
-    -v {{ kubelet_config_dir }}:/etc/kubernetes
-    -v /etc/resolv.conf:/etc/resolv.conf 
-    -d
-    hyperkube:{{ hyperkube_version }} kubelet
-    --api-servers=https://127.0.0.1:8443
-    --kubeconfig=/etc/kubernetes/node-kubeconfig.yml
-    --allow-privileged=true
-    --pod-manifest-path=/etc/kubernetes/manifests
-    --pod-infra-container-image=pause-amd64:{{ pause_version }}
-    --cgroups-per-qos=false
-    --enforce-node-allocatable=""
-  notify: Master | wait for the apiserver to be running
-
-- name: Copy kubectl from hyperkube container
+- name: "Copy kubectl from hyperkube container"
   command: "docker run --rm -v /usr/local/bin:/systembindir hyperkube:{{ hyperkube_version }} /bin/cp /hyperkube /systembindir/kubectl"
