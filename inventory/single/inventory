@@ -1,0 +1,17 @@
+node0 ansible_host=192.168.99.100 k8s_ip=192.168.99.100
+
+[registry]
+node0
+
+[etcd-server]
+node0
+
+[k8s-master]
+node0
+
+[k8s-node]
+node0
+
+[k8s-cluster:children]
+k8s-node
+k8s-master
