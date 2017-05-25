@@ -2,8 +2,8 @@
 
 - name: "Wait for api server"
   wait_for:
-    host: {{ api_ip }}
-    port: {{ api_ssl_port }}
+    host: "{{ api_ip }}"
+    port: "{{ api_ssl_port }}"
     delay: 6
 
 - name: "Create controller config"
