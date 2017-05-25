@@ -27,11 +27,13 @@
     src: "{{ item }}"
     dest: "{{ kubelet_config_dir }}/cert/"
   with_items:
+    - ca.key
     - ca.crt
     - kubelet.key
     - kubelet.crt
     - server.key
     - server.crt
+    - server.csr
 
 - name: "Copy kubectl from hyperkube container"
   command: "docker run --rm -v /usr/local/bin:/systembindir hyperkube:{{ hyperkube_version }} /bin/cp /hyperkube /systembindir/kubectl"

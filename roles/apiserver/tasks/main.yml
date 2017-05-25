@@ -5,6 +5,20 @@
     src: apiserver.yml.j2
     dest: "{{ kubelet_config_dir }}/manifests/apiserver.yml"
 
+- name: "Create apiserver openssl conf"
+  template:
+    src: openssl.conf.j2
+    dest: "{{ kubelet_config_dir }}/cert/openssl.conf"
+
+- name: "Create apiserver certificate"
+  command: >
+    openssl x509 -req
+    -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial
+    -out server.crt -days 99999 -sha256 -extensions req_ext
+    -extfile openssl.conf
+  args:
+    chdir: "{{ kubelet_config_dir }}/cert/"
+
 - name: "Check apiserver status"
   command: "docker inspect {{ kubelet_container_name }}"
   notify: Master | wait for the apiserver to be running
