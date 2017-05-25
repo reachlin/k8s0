@@ -16,3 +16,4 @@
 - hosts: k8s-master
   roles:
     - role: apiserver
+    - role: controller

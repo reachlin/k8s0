@@ -19,6 +19,7 @@
     --name {{ kubelet_container_name }}
     --privileged
     -v /var/run:/var/run
+    -v /var/log:/var/log
     -v {{ kubelet_config_dir }}:/etc/kubernetes
     -v /etc/resolv.conf:/etc/resolv.conf 
     -d

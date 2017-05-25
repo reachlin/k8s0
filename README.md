@@ -63,4 +63,10 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out s
 openssl x509 -in server.crt -text -noout
 ```
 
+### Useful commands
+
+```
+docker ps --format "{{.ID}}"|xargs -L1 docker rm -f
+```
+
 [travis]: https://travis-ci.org/reachlin/k8s0

@@ -1,0 +1,14 @@
+---
+
+- name: "Create controller config"
+  template:
+    src: controller-conf.yml.j2
+    dest: "{{ kubelet_config_dir }}/controller-conf.yml"
+
+- name: "Create controller pod yml"
+  template:
+    src: controller.yml.j2
+    dest: "{{ kubelet_config_dir }}/manifests/controller.yml"
+
+- name: "Check controller status"
+  command: "docker inspect {{ kubelet_container_name }}"
