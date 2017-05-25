@@ -1,12 +1,11 @@
-current-context: service-account-context
+current-context: kubelet-local
 apiVersion: v1
 kind: Config
 contexts:
 - context:
     cluster: local
     user: kubelet
-    namespace: default
-  name: service-account-context
+  name: kubelet-local
 clusters:
 - name: local
   cluster:
