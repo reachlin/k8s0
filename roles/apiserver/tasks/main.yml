@@ -19,6 +19,8 @@
   args:
     chdir: "{{ kubelet_config_dir }}/cert/"
 
-- name: "Check apiserver status"
-  command: "docker inspect {{ kubelet_container_name }}"
-  notify: Master | wait for the apiserver to be running
+- name: "Wait for api server"
+  wait_for:
+    host: "{{ api_ip }}"
+    port: "{{ api_ssl_port }}"
+    delay: 6

@@ -3,8 +3,24 @@
 - name: "Check docker"
   command: "docker --version"
 
+- name: "Clean stage dir "
+  file:
+    path: "{{ stage_dir }}"
+    state: absent
+
 - name: "Make stage dir "
   file:
     path: "{{ stage_dir }}"
+    state: directory
+    mode: 0755
+
+- name: "Clean k8s dir"
+  file:
+    path: "{{ kubelet_config_dir }}"
+    state: absent
+
+- name: "Make k8s dir"
+  file:
+    path: "{{ kubelet_config_dir }}"
     state: directory
     mode: 0755

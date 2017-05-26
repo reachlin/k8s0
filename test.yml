@@ -1,7 +1,5 @@
 ---
 
-- hosts: k8s-cluster
-  tasks:
-  - name: debug
-    debug:
-      var: k8s_ip
+- hosts: k8s-master
+  roles:
+    - role: controller

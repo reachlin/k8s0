@@ -8,7 +8,7 @@ So the user can try this on local host or VM, or use it on Travis for kubernetes
 
 **********************
 
-Current status: installed etcd, kubelet, and api server
+Current status: installed etcd, kubelet, api server, controller
 
 **********************
 
