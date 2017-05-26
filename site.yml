@@ -17,3 +17,4 @@
   roles:
     - role: apiserver
     - role: controller
+    - role: scheduler

@@ -7,14 +7,13 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-scheduler
-    image: registry.stage1.ng.bluemix.net/armada-master/hyperkube-amd64:armada_current-127-v1.5.6-base
+    image: "hyperkube:{{ hyperkube_version }}"
     imagePullPolicy: IfNotPresent
     command:
     - /hyperkube
     - scheduler
-    - --kubeconfig=/etc/kubernetes/scheduler-kubeconfig
-
-    - --master=https://10.143.139.206:443
+    - --kubeconfig=/etc/kubernetes/scheduler-conf.yml
+    - --master=https://{{ api_ip }}:{{ api_ssl_port }}
     - --leader-elect=False
     - --v=2
     ports:
@@ -30,8 +29,8 @@ spec:
       readOnly: true
   volumes:
   - hostPath:
-      path: /etc/kubernetes
+      path: {{ kubelet_config_dir }}
     name: kubernetes-config
   - hostPath:
-      path: /etc/kubernetes/cert
+      path: {{ kubelet_config_dir }}/cert
     name: kubernetes-certs

@@ -1,0 +1,14 @@
+---
+
+- name: "Create scheduler config"
+  template:
+    src: scheduler-conf.yml.j2
+    dest: "{{ kubelet_config_dir }}/scheduler-conf.yml"
+
+- name: "Create scheduler pod yml"
+  template:
+    src: scheduler.yml.j2
+    dest: "{{ kubelet_config_dir }}/manifests/scheduler.yml"
+
+- name: "Check scheduler status"
+  command: "docker inspect {{ kubelet_container_name }}"

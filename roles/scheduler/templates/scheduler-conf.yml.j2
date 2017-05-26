@@ -1,0 +1,20 @@
+current-context: service-account-context
+apiVersion: v1
+kind: Config
+contexts:
+- context:
+    cluster: local
+    user: scheduler
+    namespace: default
+  name: service-account-context
+clusters:
+- name: local
+  cluster:
+    certificate-authority: /etc/kubernetes/cert/ca.crt
+    apiVersion: v1
+    server: https://{{ api_ip }}:{{ api_ssl_port }}
+users:
+- name: scheduler
+  user:
+    client-certificate: /etc/kubernetes/cert/kubelet.crt
+    client-key: /etc/kubernetes/cert/kubelet.key
