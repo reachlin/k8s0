@@ -17,6 +17,6 @@ script:
   - kubectl get nodes -a
   - kubectl get pods -n kube-system
   - sleep 6
-  - kubectl create -f https://k8s.io/docs/tasks/run-application/deployment.yaml
-  - sleep 13
-  - kubectl get pods
+#  - kubectl create -f https://k8s.io/docs/tasks/run-application/deployment.yaml
+#  - sleep 13
+#  - kubectl get pods
