@@ -12,6 +12,7 @@
   roles:
     - role: k8s
     - role: kubelet
+    - role: calico
 
 - hosts: k8s-master
   roles:
