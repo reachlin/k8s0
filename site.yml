@@ -12,10 +12,13 @@
   roles:
     - role: k8s
     - role: kubelet
-    - role: calico
 
 - hosts: k8s-master
   roles:
     - role: apiserver
     - role: controller
     - role: scheduler
+
+- hosts: k8s-cluster
+  roles:
+    - role: calico
