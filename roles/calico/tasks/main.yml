@@ -2,8 +2,14 @@
 
 - name: "Create manifest yml"
   template:
-    src: calico.yaml.j2
-    dest: "{{ stage_dir }}/calico.yaml"
+    src: "{{ item }}.j2"
+    dest: "{{ stage_dir }}/{{ item }}"
+  with_items:
+    - calico.yaml
+    - calicoctl.yaml
 
 - name: "Apply Calico manifest"
-  command: "kubectl apply -f {{ stage_dir }}/calico.yaml"
+  command: "kubectl apply -f {{ stage_dir }}/{{ item }}"
+  with_items:
+    - calico.yaml
+    - calicoctl.yaml
