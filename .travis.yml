@@ -15,7 +15,8 @@ script:
   - ansible-playbook -i inventory/local site.yml
   - kubectl cluster-info
   - kubectl get nodes -a
-  - kubectl get pods -n kube-system
+  - sleep 30
+  - kubectl get all -n kube-system -o wide
 #  - sleep 60
 #  - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
 #  - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
