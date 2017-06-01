@@ -31,3 +31,4 @@
     --pod-infra-container-image=pause-amd64:{{ pause_version }}
     --cgroups-per-qos=false
     --enforce-node-allocatable=""
+    --network-plugin=cni
