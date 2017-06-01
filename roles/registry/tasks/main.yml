@@ -9,6 +9,7 @@
     - "quay.io/calico/node:v1.2.1"
     - "quay.io/calico/cni:v1.8.3"
     - "quay.io/calico/kube-policy-controller:v0.6.0"
+    - "quay.io/calico/ctl:v1.2.1"
 
 
 - name: "tag etcd locally"
@@ -26,6 +27,7 @@
     - "node:v1.2.1"
     - "cni:v1.8.3"
     - "kube-policy-controller:v0.6.0"
+    - "ctl:v1.2.1"
 
 - name: "Save to images folder"
   command: "docker save {{ item }} -o {{ playbook_dir }}/images/{{ item | regex_replace(':', '.') }}.tar"
@@ -35,4 +37,5 @@
     - "pause-amd64:3.0"
     - "node:v1.2.1"
     - "cni:v1.8.3"
-    - "kube-policy-controller:v0.6.0"    
+    - "kube-policy-controller:v0.6.0"
+    - "ctl:v1.2.1"  
