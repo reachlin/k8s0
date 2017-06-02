@@ -290,6 +290,12 @@ spec:
               value: "{{ api_ssl_port }}"
             - name: KUBERNETES_PORT_443_TCP_ADDR
               value: "{{ api_ip }}"
+            - name: KUBERNETES_PORT_443_TCP
+              value: "tcp://{{ api_ip }}:{{ api_ssl_port }}"
+            - name: KUBERNETES_PORT_443_TCP_PROTO
+              value: "tcp"
+            - name: KUBERNETES_PORT
+              value: "tcp://{{ api_ip }}:{{ api_ssl_port }}"
           volumeMounts:
             # Mount in the etcd TLS secrets.
             - mountPath: /calico-secrets
