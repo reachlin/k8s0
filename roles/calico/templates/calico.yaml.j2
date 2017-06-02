@@ -274,12 +274,18 @@ spec:
             # The location of the Kubernetes API.  Use the default Kubernetes
             # service for API access.
             - name: K8S_API
-              value: "https://{{ api_ip }}:{{ api_ssl_port }}"
+              value: "https://{{kubernetes.default}}:{{ api_ssl_port }}"
             # Since we're running in the host namespace and might not have KubeDNS
             # access, configure the container's /etc/hosts to resolve
             # kubernetes.default to the correct service clusterIP.
             - name: CONFIGURE_ETC_HOSTS
               value: "true"
+            - name: KUBERNETES_SERVICE_HOST
+              value: "{{ api_ip }}"
+            - name: KUBERNETES_SERVICE_PORT
+              value: {{ api_port }}
+            - name: KUBERNETES_SERVICE_PORT_HTTPS
+              value: {{ api_ssl_port }}
           volumeMounts:
             # Mount in the etcd TLS secrets.
             - mountPath: /calico-secrets
