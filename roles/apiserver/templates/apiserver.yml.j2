@@ -38,7 +38,12 @@ spec:
     - mountPath: /etc/kubernetes/cert
       name: kubernetes-certs
       readOnly: true
+    - mountPath: /var/log
+      name: kubernetes-log
   volumes:
+  - hostPath:
+      path: /var/log
+    name: kubernetes-log
   - hostPath:
       path: {{ kubelet_config_dir }}
     name: kubernetes-config
