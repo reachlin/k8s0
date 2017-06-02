@@ -274,7 +274,7 @@ spec:
             # The location of the Kubernetes API.  Use the default Kubernetes
             # service for API access.
             - name: K8S_API
-              value: "https://{{kubernetes.default}}:{{ api_ssl_port }}"
+              value: "https://kubernetes.default:{{ api_ssl_port }}"
             # Since we're running in the host namespace and might not have KubeDNS
             # access, configure the container's /etc/hosts to resolve
             # kubernetes.default to the correct service clusterIP.
