@@ -20,7 +20,6 @@ spec:
     - --service-cluster-ip-range={{ service_cluster_ip_range }}
     - --secure-port={{ api_ssl_port }}
     - --insecure-port={{ api_port }}
-    - --advertise-address={{ api_ip }}
     - --tls-cert-file=/etc/kubernetes/cert/server.crt
     - --tls-private-key-file=/etc/kubernetes/cert/server.key
     - --client-ca-file=/etc/kubernetes/cert/ca.crt
@@ -38,12 +37,7 @@ spec:
     - mountPath: /etc/kubernetes/cert
       name: kubernetes-certs
       readOnly: true
-    - mountPath: /var/log
-      name: kubernetes-log
   volumes:
-  - hostPath:
-      path: /var/log
-    name: kubernetes-log
   - hostPath:
       path: {{ kubelet_config_dir }}
     name: kubernetes-config
