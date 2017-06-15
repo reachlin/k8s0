@@ -39,5 +39,7 @@
     --pod-manifest-path=/etc/kubernetes/manifests
     --pod-infra-container-image=pause-amd64:{{ pause_version }}
     --cgroups-per-qos=false
-    --enforce-node-allocatable=""
-    --network-plugin=cni
+    --cluster-dns={{ cluster_dns }}
+    --cluster-domain=cluster.local
+    --enforce-node-allocatable=
+#    --network-plugin=cni
