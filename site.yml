@@ -18,6 +18,7 @@
     - role: apiserver
     - role: controller
     - role: scheduler
+    - role: addons
 
 - hosts: k8s-cluster
   roles:

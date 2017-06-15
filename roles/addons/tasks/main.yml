@@ -1,0 +1,9 @@
+---
+
+- name: "Create storage class config"
+  template:
+    src: local_storage.yml.j2
+    dest: "{{ kubelet_config_dir }}/local_storage.yml"
+
+- name: "Create storage class"
+  command: "kubectl create -f {{ kubelet_config_dir }}/local_storage.yml"

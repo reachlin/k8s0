@@ -24,9 +24,12 @@
     -v /etc/os-release:/etc/os-release:ro
     -v /etc/cni:/etc/cni:ro
     -v /opt/cni:/opt/cni:ro
+    -v /sys:/sys:ro
     -v /var/run:/var/run
     -v /var/log:/var/log
     -v /var/lib/cni:/var/lib/cni
+    -v /var/lib/docker:/var/lib/docker
+    -v /var/lib/kubelet:/var/lib/kubelet
     -v {{ kubelet_config_dir }}:/etc/kubernetes
     -d
     hyperkube:{{ hyperkube_version }} kubelet
@@ -35,6 +38,9 @@
     --allow-privileged=true
     --pod-manifest-path=/etc/kubernetes/manifests
     --pod-infra-container-image=pause-amd64:{{ pause_version }}
-    --cgroups-per-qos=false
-    --enforce-node-allocatable=""
+    --enable-controller-attach-detach=true
+    --cgroups-per-qos=true
+    --cgroup-driver=cgroupfs
     --network-plugin=cni
+    --cloud-provider=
+    --cloud-config=
