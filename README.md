@@ -2,9 +2,9 @@
 
 It's a kubernetes installation on a fixed configuration.
 
-This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/), but with the capability to run on Travis.
+This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/) or minimal version of [Kargo](https://github.com/kubernetes-incubator/kargo), but with the capability to run on Travis. 
 
-So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps.
+So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps. And the ansible script make it easy to tweak the installation steps for more usages.
 
 **********************
 
@@ -46,6 +46,7 @@ etcd -> kubelet -> api server as static pod
 * kargo: https://github.com/kubernetes-incubator/kargo
 * etcd: https://github.com/coreos/etcd/releases/
 * k8s: https://kubernetes.io/docs/getting-started-guides/scratch/#cluster-naming
+* k8s hack: https://github.com/kubernetes/kubernetes/blob/master/hack/local-up-cluster.sh
 
 ### Create certificates
 
