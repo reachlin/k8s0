@@ -21,4 +21,4 @@
 
 - hosts: k8s-cluster
   roles:
-    - role: calico
+    - role: proxy
