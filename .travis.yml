@@ -7,7 +7,7 @@ services:
   - docker
 
 before_install:
-  - sudo apt-get install -y systemd python-netaddr python-apt
+  - sudo apt-get install -y python-netaddr python-apt
   - sudo pip install ansible
 
 script:
