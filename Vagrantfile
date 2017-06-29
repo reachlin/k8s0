@@ -69,8 +69,7 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev
-    apt-get install -y python python-dev python-netaddr python-apt python-pip
+    apt-get install -y apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev python python-dev python-netaddr python-apt python-pip
     pip install --upgrade pip
     pip install ansible
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
