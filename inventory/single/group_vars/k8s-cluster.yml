@@ -14,5 +14,7 @@ etcd_ip: 192.168.99.100
 etcd_peer_port: 2380
 etcd_port: 2379
 
-service_cluster_ip_range: 10.0.0.0/24
-cluster_dns: 10.0.0.10
+service_cluster_cidr: 10.10.0.0/24
+cluster_cidr: 10.20.0.0/16
+
+cluster_dns: 10.10.0.10

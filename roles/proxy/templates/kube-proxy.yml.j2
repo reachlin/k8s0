@@ -17,7 +17,7 @@ spec:
     - --master=https://{{ api_ip }}:{{ api_ssl_port }}
     - --kubeconfig=/etc/kubernetes/node-kubeconfig.yaml
     - --bind-address=0.0.0.0
-    - --cluster-cidr={{ service_cluster_ip_range }}
+    - --cluster-cidr={{ cluster_cidr }}
     securityContext:
       privileged: true
     volumeMounts:
