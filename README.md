@@ -14,7 +14,8 @@ Current status: installed etcd, kubelet, api server, controller, scheduler, and 
 
 impediments:
 * ~~[configmap issue](https://github.com/kubernetes/kubernetes/issues/46768)~~
-* [calico issue](https://github.com/projectcalico/calico/issues/825)
+* ~~[calico issue](https://github.com/projectcalico/calico/issues/825)~~
+* have to add a flag for k8s0 to run on Travis, because its docker has problems with 'shared' flag of volume mounted. `travis_docker_bug: rw,shared` [travis docker issue](https://github.com/travis-ci/worker/issues/329)
 
 **********************
 
