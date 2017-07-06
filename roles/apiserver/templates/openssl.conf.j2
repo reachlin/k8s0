@@ -12,6 +12,7 @@ CN = apiserver
 subjectAltName = @alt_names
  
 [ alt_names ]
-DNS.1 = {{ inventory_hostname }}
+DNS.1 = kubernetes.default
+DNS.2 = {{ inventory_hostname }}
 IP.1 = 127.0.0.1
 IP.2 = {{ api_ip }}

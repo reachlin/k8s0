@@ -23,13 +23,15 @@
     -v /etc/resolv.conf:/etc/resolv.conf
     -v /etc/os-release:/etc/os-release:ro
     -v /etc/cni:/etc/cni:ro
+    -v /etc/ssl:/etc/ssl:ro
+    -v /lib/modules:/lib/modules:ro
     -v /opt/cni:/opt/cni:ro
     -v /sys:/sys:ro
     -v /var/run:/var/run
     -v /var/log:/var/log
     -v /var/lib/cni:/var/lib/cni
     -v /var/lib/docker:/var/lib/docker
-    -v /var/lib/kubelet:/var/lib/kubelet
+    -v /var/lib/kubelet:/var/lib/kubelet:rw,shared
     -v {{ kubelet_config_dir }}:/etc/kubernetes
     -d
     hyperkube:{{ hyperkube_version }} kubelet
@@ -43,4 +45,4 @@
     --cluster-domain=cluster.local
     --enforce-node-allocatable=
     --hostname-override={{ k8s_ip }}
-#    --network-plugin=cni
+    --network-plugin=cni

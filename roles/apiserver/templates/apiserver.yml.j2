@@ -24,7 +24,7 @@ spec:
     - --tls-private-key-file=/etc/kubernetes/cert/server.key
     - --client-ca-file=/etc/kubernetes/cert/ca.crt
     - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
-    - --authorization-mode=AlwaysAllow
+    - --authorization-mode=AlwaysAllow,RBAC
     ports:
     - containerPort: {{ api_ssl_port }}
       hostPort: {{ api_ssl_port }}
