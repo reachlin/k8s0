@@ -6,19 +6,22 @@ This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guide
 
 So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps. And the ansible script make it easy to tweak the installation steps for more usages.
 
+Another difference from MiniKube is this project use the same image as the full-fledged k8s, no wrapper or any code changes. All source code is ansible script to deploy and configure k8s.
+
 **********************
 
-Current status: installed etcd, kubelet, api server, controller, scheduler,
+Current status: installed etcd, kubelet, api server, controller, scheduler, and proxy, but calico still not working...
 
 impediments:
 * ~~[configmap issue](https://github.com/kubernetes/kubernetes/issues/46768)~~
-* [calico issue](https://github.com/projectcalico/calico/issues/825)
+* ~~[calico issue](https://github.com/projectcalico/calico/issues/825)~~
+* have to add a flag for k8s0 to run on Travis, because its docker has problems with 'shared' flag of volume mounted. `travis_docker_bug: rw,shared` [travis docker issue](https://github.com/travis-ci/worker/issues/329)
 
 **********************
 
 ## Prerequisites
 
-For now, only support ubuntu 16.04 with docker and ansible installed.
+For now, only support ubuntu >=14.04 with docker and ansible installed.
 
 ## Usage
 
@@ -31,6 +34,8 @@ ansible-playbook -i inventory/local site.yml
 ```
 
 Check .travis.yml for more details.
+
+Or, use vagrant `vagrant up` in the source root folder.
 
 ## Features
 

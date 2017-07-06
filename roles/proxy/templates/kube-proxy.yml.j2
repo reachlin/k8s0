@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+  labels:
+    k8s-app: kube-proxy
+spec:
+  hostNetwork: true
+  containers:
+  - name: kube-proxy
+    image: "hyperkube:{{ hyperkube_version }}"
+    imagePullPolicy: IfNotPresent
+    command:
+    - /hyperkube
+    - proxy
+    - --kubeconfig=/etc/kubernetes/node-kubeconfig.yaml
+    - --bind-address={{ k8s_ip }}
+    - --cluster-cidr={{ cluster_cidr }}
+    - --hostname-override={{ k8s_ip }}
+    - --proxy-mode=iptables
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /etc/ssl/certs
+      name: ssl-certs-host
+      readOnly: true
+    - mountPath: /etc/kubernetes/node-kubeconfig.yaml
+      name: "kubeconfig"
+      readOnly: true
+    - mountPath: /etc/kubernetes/cert
+      name: "etc-kube-ssl"
+      readOnly: true
+    - mountPath: /var/run/dbus
+      name: "var-run-dbus"
+      readOnly: false
+  volumes:
+  - name: ssl-certs-host
+    hostPath:
+      path: /usr/share/ca-certificates
+  - name: "kubeconfig"
+    hostPath:
+      path: "{{ kubelet_config_dir }}/kubelet-config.yml"
+  - name: "etc-kube-ssl"
+    hostPath:
+      path: "{{ kubelet_config_dir }}/cert"
+  - name: "var-run-dbus"
+    hostPath:
+      path: "/var/run/dbus"

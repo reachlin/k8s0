@@ -12,17 +12,19 @@ spec:
     command:
     - /hyperkube
     - apiserver
-    - --bind-address=0.0.0.0
+    - --bind-address={{ api_ip }}
     - --insecure-bind-address=127.0.0.1
     - --storage-backend=etcd3
     - --etcd-servers=http://{{ etcd_ip }}:{{ etcd_port }}
     - --allow-privileged=true
-    - --service-cluster-ip-range={{ service_cluster_ip_range }}
+    - --service-cluster-ip-range={{ service_cluster_cidr }}
     - --secure-port={{ api_ssl_port }}
     - --insecure-port={{ api_port }}
     - --tls-cert-file=/etc/kubernetes/cert/server.crt
     - --tls-private-key-file=/etc/kubernetes/cert/server.key
     - --client-ca-file=/etc/kubernetes/cert/ca.crt
+    - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
+    - --authorization-mode=AlwaysAllow,RBAC
     ports:
     - containerPort: {{ api_ssl_port }}
       hostPort: {{ api_ssl_port }}

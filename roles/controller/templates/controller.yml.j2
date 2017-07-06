@@ -16,6 +16,7 @@ spec:
     - --service-account-private-key-file=/etc/kubernetes/cert/server.key
     - --root-ca-file=/etc/kubernetes/cert/ca.crt
     - --leader-elect=False
+    - --cluster-cidr={{ cluster_cidr }}
     - --v=2
     volumeMounts:
     - mountPath: /etc/kubernetes

@@ -1,4 +1,4 @@
-kubelet_config_dir: "{{ ansible_env.HOME }}/k8s"
+kubelet_config_dir: "/opt/k8s"
 
 etcd_version: v3.2.0-rc.0
 hyperkube_version: v1.6.4
@@ -14,5 +14,7 @@ etcd_ip: 127.0.0.1
 etcd_peer_port: 2380
 etcd_port: 2379
 
-service_cluster_ip_range: 10.0.0.0/24
-cluster_dns: 10.0.0.10
+service_cluster_cidr: 10.10.0.0/24
+cluster_cidr: 10.20.0.0/16
+
+cluster_dns: 10.10.0.10

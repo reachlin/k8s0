@@ -1,0 +1,6 @@
+---
+
+- name: "Create kube-proxy config"
+  template:
+    src: kube-proxy.yml.j2
+    dest: "{{ kubelet_config_dir }}/manifests/kube-proxy.yml"

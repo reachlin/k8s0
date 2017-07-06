@@ -7,18 +7,18 @@ services:
   - docker
 
 before_install:
-  - sudo apt-get install -y systemd python-netaddr python-apt
+  - sudo apt-get install -y python-netaddr python-apt
   - sudo pip install ansible
 
 script:
   - ansible-playbook -i inventory/local images.yml
-  - ansible-playbook -i inventory/local site.yml
+  - ansible-playbook -i inventory/local site.yml --extra-vars "travis_docker_bug=rw"
   - kubectl cluster-info
   - kubectl get nodes -a
   - sleep 30
   - kubectl get all -n kube-system -o wide
-  - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
-  - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
-#  - kubectl create -f https://k8s.io/docs/tasks/run-application/deployment.yaml
+#  - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
+#  - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
+  - kubectl create -f https://k8s.io/docs/tasks/run-application/deployment.yaml
 #  - sleep 13
-#  - kubectl get pods
+  - kubectl get pods

@@ -1,9 +1,11 @@
 ---
 
 - name: "Check docker"
+  become: true
   command: "docker --version"
 
 - name: "Clean stage dir "
+  become: true
   file:
     path: "{{ stage_dir }}"
     state: absent
@@ -15,11 +17,13 @@
     mode: 0755
 
 - name: "Clean k8s dir"
+  become: true
   file:
     path: "{{ kubelet_config_dir }}"
     state: absent
 
 - name: "Make k8s dir"
+  become: true
   file:
     path: "{{ kubelet_config_dir }}"
     state: directory
