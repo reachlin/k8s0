@@ -42,4 +42,5 @@
     --cluster-dns={{ cluster_dns }}
     --cluster-domain=cluster.local
     --enforce-node-allocatable=
+    --hostname-override={{ k8s_ip }}
 #    --network-plugin=cni

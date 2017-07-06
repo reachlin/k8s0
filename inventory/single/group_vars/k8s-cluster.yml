@@ -1,4 +1,4 @@
-kubelet_config_dir: "/tmp/k8s"
+kubelet_config_dir: "/opt/k8s"
 
 etcd_version: v3.2.0-rc.0
 hyperkube_version: v1.6.4

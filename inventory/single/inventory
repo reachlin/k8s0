@@ -1,4 +1,4 @@
-node0 ansible_host=192.168.99.100 k8s_ip=192.168.99.100
+node0 ansible_host=192.168.99.100 ansible_become=true k8s_ip=192.168.99.100
 
 [registry]
 node0

@@ -280,6 +280,8 @@ spec:
             # kubernetes.default to the correct service clusterIP.
             - name: CONFIGURE_ETC_HOSTS
               value: "true"
+            - name: LOG_LEVEL
+              value: "debug"
           volumeMounts:
             # Mount in the etcd TLS secrets.
             - mountPath: /calico-secrets

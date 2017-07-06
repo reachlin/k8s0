@@ -14,10 +14,11 @@ spec:
     command:
     - /hyperkube
     - proxy
-    - --master=https://{{ api_ip }}:{{ api_ssl_port }}
     - --kubeconfig=/etc/kubernetes/node-kubeconfig.yaml
-    - --bind-address=0.0.0.0
+    - --bind-address={{ k8s_ip }}
     - --cluster-cidr={{ cluster_cidr }}
+    - --hostname-override={{ k8s_ip }}
+    - --proxy-mode=iptables
     securityContext:
       privileged: true
     volumeMounts:

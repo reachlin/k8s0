@@ -17,6 +17,7 @@
   command: "docker load --input {{ stage_dir }}/pause-amd64.{{ pause_version }}.tar"
 
 - name: "Make k8s certificates dir"
+  become: true
   file:
     path: "{{ kubelet_config_dir }}/cert"
     state: directory
