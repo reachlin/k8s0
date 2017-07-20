@@ -1,12 +1,14 @@
 # k8s0: Kubernetes Ground Zero [![Build Status](https://travis-ci.org/reachlin/k8s0.svg)][travis]
 
-It's a kubernetes installation on a fixed configuration.
+It's a minimal kubernetes installation on a fixed configuration.
 
 This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/) or minimal version of [Kargo](https://github.com/kubernetes-incubator/kargo), but with the capability to run on Travis. 
 
 So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps. And the ansible script make it easy to tweak the installation steps for more usages.
 
 Another difference from MiniKube is this project use the same image as the full-fledged k8s, no wrapper or any code changes. All source code is ansible script to deploy and configure k8s.
+
+One more thing, all components are installed as containers including etcd, kubelet, calico, ...
 
 **********************
 
@@ -25,6 +27,13 @@ For now, only support ubuntu >=14.04 with docker and ansible installed.
 
 ## Usage
 
+### Deploy using Vagrant
+Use vagrant `vagrant up` in the source root folder.
+
+### deploy on Travis
+Check .travis.yml for more details.
+
+### deploy on localhost
 ```
 # pull images and put into ./images folder
 ansible-playbook -i inventory/local images.yml
@@ -33,9 +42,17 @@ ansible-playbook -i inventory/local images.yml
 ansible-playbook -i inventory/local site.yml
 ```
 
-Check .travis.yml for more details.
+### deploy to a remote host
+```
+# change ip to the remote host
+https://github.com/reachlin/k8s0/blob/master/inventory/single/inventory
 
-Or, use vagrant `vagrant up` in the source root folder.
+# pull images and put into ./images folder
+ansible-playbook -i inventory/single images.yml
+
+# start kubernetes on localhost
+ansible-playbook -i inventory/single site.yml
+```
 
 ## Features
 
@@ -43,11 +60,13 @@ Or, use vagrant `vagrant up` in the source root folder.
 
 * Include a local registry or repo, so k8s can be deployed without an internet connection.
 
+* All k8s components running as containers
+
 ## Dev. Notes
 
 ### Basic steps
 
-etcd -> kubelet -> api server as static pod
+etcd -> kubelet -> api server as static pod -> other k8s pods -> calico
 
 ### References
 
@@ -76,7 +95,8 @@ openssl x509 -in server.crt -text -noout
 ### Useful commands
 
 ```
-docker ps --format "{{.ID}}"|xargs -L1 docker rm -f
+# clean all
+docker ps -a --format "{{.ID}}"|xargs -L1 docker rm -f
 ```
 
 [travis]: https://travis-ci.org/reachlin/k8s0
