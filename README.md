@@ -30,10 +30,10 @@ For now, only support ubuntu >=14.04 with docker and ansible installed.
 ### Deploy using Vagrant
 Use vagrant `vagrant up` in the source root folder.
 
-### deploy on Travis
+### Deploy on Travis
 Check .travis.yml for more details.
 
-### deploy on localhost
+### Deploy on localhost
 ```
 # pull images and put into ./images folder
 ansible-playbook -i inventory/local images.yml
@@ -42,7 +42,7 @@ ansible-playbook -i inventory/local images.yml
 ansible-playbook -i inventory/local site.yml
 ```
 
-### deploy to a remote host
+### Deploy to a remote host
 ```
 # change ip to the remote host
 https://github.com/reachlin/k8s0/blob/master/inventory/single/inventory
