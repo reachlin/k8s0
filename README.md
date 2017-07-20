@@ -12,9 +12,9 @@ One more thing, all components are installed as containers including etcd, kubel
 
 **********************
 
-Current status: installed etcd, kubelet, api server, controller, scheduler, and proxy, but calico still not working...
+Current status: installed etcd, kubelet, api server, controller, scheduler, proxy, and calico as network plugin.
 
-impediments:
+Impediments:
 * ~~[configmap issue](https://github.com/kubernetes/kubernetes/issues/46768)~~
 * ~~[calico issue](https://github.com/projectcalico/calico/issues/825)~~
 * have to add a flag for k8s0 to run on Travis, because its docker has problems with 'shared' flag of volume mounted. `travis_docker_bug: rw,shared` [travis docker issue](https://github.com/travis-ci/travis-ci/issues/8104)
