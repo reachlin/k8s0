@@ -31,7 +31,7 @@
     -v /var/log:/var/log
     -v /var/lib/cni:/var/lib/cni
     -v /var/lib/docker:/var/lib/docker
-    -v /var/lib/kubelet:/var/lib/kubelet:rw,shared
+    -v /var/lib/kubelet:/var/lib/kubelet:{{ travis_docker_bug }}
     -v {{ kubelet_config_dir }}:/etc/kubernetes
     -d
     hyperkube:{{ hyperkube_version }} kubelet
