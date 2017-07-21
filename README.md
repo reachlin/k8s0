@@ -17,7 +17,7 @@ Current status: installed etcd, kubelet, api server, controller, scheduler, prox
 Impediments:
 * ~~[configmap issue](https://github.com/kubernetes/kubernetes/issues/46768)~~
 * ~~[calico issue](https://github.com/projectcalico/calico/issues/825)~~
-* ~~[travis docker issue](https://github.com/travis-ci/travis-ci/issues/8104)~~
+* [travis docker issue](https://github.com/travis-ci/travis-ci/issues/8104)
 
 **********************
 
