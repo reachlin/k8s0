@@ -16,7 +16,7 @@ before_install:
 
 script:
   - ansible-playbook -i inventory/local images.yml
-  - ansible-playbook -i inventory/local site.yml
+  - ansible-playbook -i inventory/local site.yml --extra-vars "travis_docker_bug=rw"
   - kubectl cluster-info
   - kubectl get nodes -a
   - sleep 30
@@ -24,5 +24,5 @@ script:
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
   - kubectl create -f https://k8s.io/docs/tasks/run-application/deployment.yaml
-#  - sleep 13
+  - sleep 7
   - kubectl get pods
