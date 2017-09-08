@@ -46,3 +46,4 @@
     --enforce-node-allocatable=
     --hostname-override={{ k8s_ip }}
     --network-plugin=cni
+    --containerized
