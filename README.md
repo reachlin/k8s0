@@ -44,6 +44,7 @@ ansible-playbook -i inventory/local site.yml
 
 ### Deploy to a remote host
 ```
+
 # change ip to the remote host
 https://github.com/reachlin/k8s0/blob/master/inventory/single/inventory
 
@@ -52,6 +53,17 @@ ansible-playbook -i inventory/single images.yml
 
 # start kubernetes on localhost
 ansible-playbook -i inventory/single site.yml
+```
+### Deploy to multi remote hosts
+```
+
+# change ips
+https://github.com/reachlin/k8s0/blob/master/inventory/multi/inventory
+# pull images and put into ./images folder
+ansible-playbook -i inventory/multi images.yml
+
+# start kubernetes on localhost
+ansible-playbook -i inventory/multi site.yml
 ```
 
 ## Features
