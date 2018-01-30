@@ -1,1 +1,2 @@
 etcd_container_name: etcd
+etcd_version: latest

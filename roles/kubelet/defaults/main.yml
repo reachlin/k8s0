@@ -1,1 +1,3 @@
 travis_docker_bug: rw,shared
+hyperkube_version: latest
+pause_version: latest

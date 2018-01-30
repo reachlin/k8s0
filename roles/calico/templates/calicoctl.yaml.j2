@@ -7,7 +7,7 @@ spec:
   hostNetwork: true
   containers:
   - name: calicoctl
-    image: ctl:v1.2.1
+    image: ctl:latest
     command: ["/bin/sh", "-c", "while true; do sleep 3600; done"]
     env:
     - name: ETCD_ENDPOINTS

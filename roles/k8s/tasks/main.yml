@@ -2,19 +2,19 @@
 
 - name: "Copy docker hyperkube image"
   copy:
-    src: "{{ playbook_dir }}/images/hyperkube.{{ hyperkube_version }}.tar"
-    dest: "{{ stage_dir }}/hyperkube.{{ hyperkube_version }}.tar"
+    src: "{{ playbook_dir }}/images/hyperkube.tar"
+    dest: "{{ stage_dir }}/hyperkube.tar"
 
 - name: "Import docker hyperkube image"
-  command: "docker load --input {{ stage_dir }}/hyperkube.{{ hyperkube_version }}.tar"
+  command: "docker load --input {{ stage_dir }}/hyperkube.tar"
 
 - name: "Copy docker pause image"
   copy:
-    src: "{{ playbook_dir }}/images/pause-amd64.{{ pause_version }}.tar"
-    dest: "{{ stage_dir }}/pause-amd64.{{ pause_version }}.tar"
+    src: "{{ playbook_dir }}/images/pause.tar"
+    dest: "{{ stage_dir }}/pause.tar"
 
 - name: "Import docker pause image"
-  command: "docker load --input {{ stage_dir }}/pause-amd64.{{ pause_version }}.tar"
+  command: "docker load --input {{ stage_dir }}/pause.tar"
 
 - name: "Make k8s certificates dir"
   become: true
@@ -37,4 +37,4 @@
     - server.csr
 
 - name: "Copy kubectl from hyperkube container"
-  command: "docker run --rm -v /usr/local/bin:/systembindir hyperkube:{{ hyperkube_version }} /bin/cp /hyperkube /systembindir/kubectl"
+  command: "docker run --rm -v /usr/local/bin:/systembindir hyperkube /bin/cp /hyperkube /systembindir/kubectl"

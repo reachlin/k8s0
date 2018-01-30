@@ -9,7 +9,7 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-proxy
-    image: "hyperkube:{{ hyperkube_version }}"
+    image: "hyperkube:latest"
     imagePullPolicy: IfNotPresent
     command:
     - /hyperkube
