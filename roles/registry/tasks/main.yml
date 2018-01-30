@@ -2,12 +2,12 @@
 
 - name: "Pull images"
   command: "docker pull {{ item.url }}"
-  with_items: {{ images }}
+  with_items: "{{ images }}"
 
 - name: "tag images"
   command: "docker tag {{ item.url }} {{ item.name }}:latest"
-  with_items: {{ images }}
+  with_items: "{{ images }}"
 
 - name: "Save to images folder"
   command: "docker save {{ item.name }}:latest -o {{ playbook_dir }}/images/{{ item.name }}.tar"
-  with_items: {{ images }}
+  with_items: "{{ images }}"
