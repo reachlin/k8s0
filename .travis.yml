@@ -16,12 +16,14 @@ script:
   - ansible-playbook -i inventory/local site.yml --extra-vars "travis_docker_bug=rw"
   - kubectl cluster-info
   - kubectl get nodes -a
-  - sleep 30
+  - sleep 99
   - kubectl get all -n kube-system -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
   - wget https://k8s.io/docs/tasks/run-application/deployment.yaml
   - sed -i 's/v1/v1beta2/g' deployment.yaml
   - kubectl create -f deployment.yaml
-  - sleep 7
+  - kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+  - sleep 9
+  - kubectl get all -n kube-system -o wide
   - kubectl get pods
