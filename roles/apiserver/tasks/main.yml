@@ -18,3 +18,9 @@
     -extfile openssl.conf
   args:
     chdir: "{{ kubelet_config_dir }}/cert/"
+
+- name: "Wait for api server"
+  wait_for:
+    host: "{{ api_ip }}"
+    port: "{{ api_ssl_port }}"
+    delay: 9
