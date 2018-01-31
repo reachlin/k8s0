@@ -1,9 +1,6 @@
-language: python
-python: "2.7"
-
-dist: trusty
-
 sudo: required
+dist: trusty
+group: deprecated-2017Q4
 
 addons:
   apt:
@@ -11,7 +8,7 @@ addons:
       - docker-ce
 
 before_install:
-  - sudo apt-get install -y python-netaddr python-apt wget
+  - sudo apt-get install -y python python-dev python-netaddr python-apt wget
   - sudo pip install ansible
 
 script:
