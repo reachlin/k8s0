@@ -21,6 +21,7 @@ script:
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
   - wget https://k8s.io/docs/tasks/run-application/deployment.yaml
+  - sed -i 's/v1/v1beta2/g' deployment.yaml
   - kubectl create -f deployment.yaml
   - sleep 7
   - kubectl get pods
