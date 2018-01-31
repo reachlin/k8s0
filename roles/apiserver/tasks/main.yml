@@ -20,7 +20,7 @@
     chdir: "{{ kubelet_config_dir }}/cert/"
 
 - name: "Check api containers"
-  command: "docker ps"
+  command: "docker ps|grep api|cut -d' ' -f 1|xargs docker logs"
 
 - name: "Wait for api server"
   wait_for:
