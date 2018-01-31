@@ -17,6 +17,7 @@ script:
   - kubectl cluster-info
   - kubectl get nodes -a
   - sleep 99
+  - kubectl get serviceAccounts -n kube-system
   - kubectl get all -n kube-system -o wide
   - kubectl describe ds -n kube-system calico-node
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
