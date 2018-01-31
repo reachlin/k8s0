@@ -1,7 +1,7 @@
 images:
   - { url: "quay.io/coreos/etcd:v3.2.15", name: "etcd"}
-  - { url: "gcr.io/google_containers/hyperkube:v1.9.2", name: "hyperkube"}
-  - { url: "gcr.io/google_containers/pause-amd64:3.1", name: "pause"}
+  - { url: "gcr.io/google_containers/hyperkube:v1.8.4", name: "hyperkube"}
+  - { url: "gcr.io/google_containers/pause-amd64:3.0", name: "pause"}
   - { url: "quay.io/calico/node:v3.0.1", name: "node"}
   - { url: "quay.io/calico/cni:v2.0.0", name: "cni"}
   - { url: "quay.io/calico/kube-policy-controller:v0.7.0", name: "kube-policy-controller"}
