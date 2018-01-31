@@ -14,4 +14,5 @@ before_install:
 script:
   - ansible-playbook -i inventory/local images.yml
   - ansible-playbook -vvv -i inventory/local test.yml --extra-vars "travis_docker_bug=rw"
+  - docker ps -a
   - docker ps | grep api | cut -d" " -f 1 | xargs docker logs
