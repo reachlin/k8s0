@@ -15,9 +15,9 @@ spec:
     - /hyperkube
     - proxy
     - --kubeconfig=/etc/kubernetes/node-kubeconfig.yaml
-    - --bind-address={{ k8s_ip }}
+    - --bind-address={{ api_ip }}
     - --cluster-cidr={{ cluster_cidr }}
-    - --hostname-override={{ k8s_ip }}
+#    - --hostname-override={{ k8s_ip }}
     - --proxy-mode=iptables
     securityContext:
       privileged: true

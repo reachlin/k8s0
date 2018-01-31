@@ -1,0 +1,20 @@
+master ansible_host=192.168.99.100 ansible_become=true k8s_ip=192.168.99.100
+node0  ansible_host=192.168.99.101 ansible_become=true k8s_ip=192.168.99.101
+node1  ansible_host=192.168.99.102 ansible_become=true k8s_ip=192.168.99.102
+
+[registry]
+master
+
+[etcd-server]
+master
+
+[k8s-master]
+master
+
+[k8s-node]
+node0
+node1
+
+[k8s-cluster:children]
+k8s-node
+k8s-master
