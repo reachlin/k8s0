@@ -21,9 +21,7 @@ script:
   - kubectl get all -n kube-system -o wide
   - kubectl describe ds -n kube-system calico-node
   - docker ps -a
-  - docker ps -a|grep calico-node
-  - docker ps -a|grep calico-node|cut -d" " -f 1
-  - docker ps -a|grep calico-node|cut -d" " -f 1|xargs docker logs
+  - docker ps -a|grep calico-node_calico-node|cut -d" " -f 1|xargs docker logs
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
   - wget https://k8s.io/docs/tasks/run-application/deployment.yaml
