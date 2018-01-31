@@ -8,6 +8,14 @@
     - calico.yaml
     - calicoctl.yaml
 
+- name: "Copy Calico roles file"
+  copy:
+    src: "rbac.yaml"
+    dest: "{{ stage_dir }}/rbac.yaml"
+
+- name: "Apply Calico roles"
+  command: "kubectl apply -f {{ stage_dir }}/rbac.yaml"
+
 - name: "Apply Calico manifest"
   command: "kubectl apply -f {{ stage_dir }}/{{ item }}"
   with_items:
