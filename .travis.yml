@@ -8,7 +8,7 @@ addons:
       - docker-ce
 
 before_install:
-  - sudo apt-get install -y python python-dev python-netaddr python-apt wget
+  - sudo apt-get install -y python python-dev python-netaddr python-apt
   - sudo pip install ansible
 
 script:
@@ -16,7 +16,7 @@ script:
   - ansible-playbook -i inventory/local site.yml --extra-vars "travis_docker_bug=rw"
   - kubectl cluster-info
   - kubectl get nodes -a
-  - sleep 99
+  - sleep 66
   - kubectl get serviceAccounts -n kube-system
   - kubectl get all -n kube-system -o wide
   - kubectl describe ds -n kube-system calico-node
@@ -24,10 +24,6 @@ script:
   - docker ps -a|grep calico-node_calico-node|cut -d" " -f 1|xargs docker logs
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
-  - wget https://k8s.io/docs/tasks/run-application/deployment.yaml
-  - sed -i 's/v1/v1beta2/g' deployment.yaml
-  - kubectl create -f deployment.yaml
-  - kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
-  - sleep 9
-  - kubectl get all -n kube-system -o wide
-  - kubectl get pods
+  - kubectl create -f test/kubernetes-dashboard.yaml
+  - sleep 7
+  - kubectl get pods -o wide -n kube-system
