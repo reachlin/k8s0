@@ -82,7 +82,7 @@ Vagrant.configure("2") do |config|
 
   # vagrant ansible provisioner seems not working
   config.vm.provision "shell", inline: <<-SHELL
-    ansible-playbook -i /vagrant/inventory/local /vagrant/images.yml
-    ansible-playbook -i /vagrant/inventory/local /vagrant/site.yml
+    ansible-playbook -i /vagrant/inventory/single /vagrant/images.yml
+    ansible-playbook -i /vagrant/inventory/single /vagrant/site.yml
   SHELL
 end
