@@ -1,9 +1,5 @@
 kubelet_config_dir: "/opt/k8s"
 
-etcd_version: v3.2.0-rc.0
-hyperkube_version: v1.6.4
-pause_version: 3.0
-
 kubelet_container_name: kubelet
 
 api_ip: 192.168.99.100

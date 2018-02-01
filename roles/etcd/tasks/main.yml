@@ -2,11 +2,11 @@
 
 - name: "Copy docker etcd image"
   copy:
-    src: "{{ playbook_dir }}/images/etcd.{{ etcd_version }}.tar"
-    dest: "{{ stage_dir }}/etcd.{{ etcd_version }}.tar"
+    src: "{{ playbook_dir }}/images/etcd.tar"
+    dest: "{{ stage_dir }}/etcd.tar"
 
 - name: "Import docker etcd image"
-  command: "docker load --input {{ stage_dir }}/etcd.{{ etcd_version }}.tar"
+  command: "docker load --input {{ stage_dir }}/etcd.tar"
 
 - name: "Run etcd"
   command: >

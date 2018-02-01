@@ -23,4 +23,4 @@
   wait_for:
     host: "{{ api_ip }}"
     port: "{{ api_ssl_port }}"
-    delay: 6
+    delay: 9

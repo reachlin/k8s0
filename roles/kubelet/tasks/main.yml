@@ -35,11 +35,10 @@
     -v {{ kubelet_config_dir }}:/etc/kubernetes
     -d
     hyperkube:{{ hyperkube_version }} kubelet
-    --api-servers=https://{{ api_ip }}:{{ api_ssl_port }}
     --kubeconfig=/etc/kubernetes/kubelet-config.yml
     --allow-privileged=true
     --pod-manifest-path=/etc/kubernetes/manifests
-    --pod-infra-container-image=pause-amd64:{{ pause_version }}
+    --pod-infra-container-image=pause:{{ pause_version }}
     --cgroups-per-qos=false
     --cluster-dns={{ cluster_dns }}
     --cluster-domain=cluster.local

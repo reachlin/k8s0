@@ -2,11 +2,13 @@
 
 It's a minimal kubernetes installation on a fixed configuration.
 
-This project is like [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/) or minimal version of [Kargo](https://github.com/kubernetes-incubator/kargo), but with the capability to run on Travis. 
+But *WHY* ? Many people told me there's alreday [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/). Unlike MiniKube, which is a layer of golang code wrapped around the real hyperkube, k8s0 uses the exact hyperkube image. It's more like a minimal version of [Kargo](https://github.com/kubernetes-incubator/kargo), but with the capability to run on Travis.
 
-So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps. And the ansible script make it easy to tweak the installation steps for more usages.
+Another advantage of k8s0 is we have a step of pulling all necessary images before actual installation. This is very helpful if you are not able to access the internet during the installation, for example, behind the company's firewall, or in some "evil countries" where all google sites are banned. The solution is run the pull image step on a computer with internet connection. After you run `images.yml`, all images will be copied into `images` folder. Then you can copy these tar files to the isolated env. and run the rest installation.
 
-Another difference from MiniKube is this project use the same image as the full-fledged k8s, no wrapper or any code changes. All source code is ansible script to deploy and configure k8s.
+So the user can try this on local host or VM, or use it on Travis for kubernetes DevOps. Developers can verify their service deployment before going to the real production env. And the ansible script make it easy to tweak the installation steps for more usages. On the other hand, if you want to change anything in MiniKube, you have to write golang code and compile it.
+
+Addtionally, people use MiniKube mainly for education purposes, but the one giant piece golang code of MiniKube makes it difficult to understand how k8s is installed and how each component interacts. Within k8s0, each installation step is nicely organized as `role` of ansible script. It is very straight-forward to follow.
 
 One more thing, all components are installed as containers including etcd, kubelet, calico, ...
 
@@ -69,7 +71,7 @@ ansible-playbook -i inventory/multi site.yml
 
 * Minimal kubernetes on travis for DevOps.
 
-* Include a local registry or repo, so k8s can be deployed without an internet connection.
+* Include a local copy of all images, so kubernetes can be deployed without an internet connection.
 
 * All k8s components running as containers
 
@@ -78,6 +80,11 @@ ansible-playbook -i inventory/multi site.yml
 ### Basic steps
 
 etcd -> kubelet -> api server as static pod -> other k8s pods -> calico
+
+### Treak the versions
+
+If you want to change the version of various container images of k8s, pls refer to `registry/defaults/main.yml`.
+
 
 ### References
 
