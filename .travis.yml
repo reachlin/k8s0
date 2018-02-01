@@ -11,7 +11,7 @@ addons:
       - docker-ce
 
 before_install:
-  - sudo apt-get install -y python-netaddr python-apt wget
+  - sudo apt-get install -y python python-dev python-netaddr python-apt
   - sudo pip install ansible
 
 script:
@@ -23,8 +23,6 @@ script:
   - kubectl get all -n kube-system -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
-  - wget https://k8s.io/docs/tasks/run-application/deployment.yaml
-  - sed -i 's/v1beta2/v1beta1/g' deployment.yaml
-  - kubectl create -f deployment.yaml
+  - kubectl create -f test/nginx.yaml
   - sleep 7
   - kubectl get pods
