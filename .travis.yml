@@ -26,4 +26,5 @@ script:
   - kubectl create -f test/kubernetes-dashboard.yaml
   - kubectl create -f test/nginx.yaml
   - sleep 66
+  - kubectl get pods -o wide
   - kubectl get pods -o wide -n kube-system
