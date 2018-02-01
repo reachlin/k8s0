@@ -119,4 +119,4 @@ docker ps -a --format "{{.ID}}"|xargs -L1 docker rm -f
 
 [travis]: https://travis-ci.org/reachlin/k8s0
 
-last updated 02-01-2018, this is the version for hyperkube 1.6.4
+last updated 02-01-2018, this is the version for hyperkube 1.8.4
