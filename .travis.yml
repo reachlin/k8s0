@@ -25,4 +25,6 @@ script:
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
   - kubectl create -f test/nginx.yaml
   - sleep 7
-  - kubectl get pods
+  - kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
+  - sleep 10
+  - kubectl get pods -o wide
