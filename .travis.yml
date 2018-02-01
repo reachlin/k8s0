@@ -24,5 +24,6 @@ script:
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get node -o wide
   - kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
   - kubectl create -f test/kubernetes-dashboard.yaml
+  - kubectl create -f test/nginx.yaml
   - sleep 66
   - kubectl get pods -o wide -n kube-system
