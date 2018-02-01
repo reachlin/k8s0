@@ -12,7 +12,7 @@ before_install:
 
 script:
   - ansible-playbook -i inventory/local images.yml
-  - ansible-playbook -i inventory/local site.yml
+  - ansible-playbook -i inventory/local site.yml --extra-vars "travis_docker_bug=rw"
   - kubectl cluster-info
   - kubectl get nodes -a
   - sleep 66
