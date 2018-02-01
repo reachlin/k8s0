@@ -102,6 +102,7 @@ spec:
         # host.
         - name: calico-node
           image: node:latest
+          imagePullPolicy: IfNotPresent
           env:
             # The location of the Calico etcd cluster.
             - name: ETCD_ENDPOINTS
@@ -163,6 +164,7 @@ spec:
         # and CNI network config file on each node.
         - name: install-cni
           image: cni:latest
+          imagePullPolicy: IfNotPresent
           command: ["/install-cni.sh"]
           env:
             # The location of the Calico etcd cluster.
@@ -238,6 +240,7 @@ spec:
       containers:
         - name: calico-policy-controller
           image: kube-policy-controller:latest
+          imagePullPolicy: IfNotPresent
           env:
             # The location of the Calico etcd cluster.
             - name: ETCD_ENDPOINTS
@@ -309,6 +312,7 @@ spec:
         # Writes basic configuration to datastore.
         - name: configure-calico
           image: ctl:latest
+          imagePullPolicy: IfNotPresent
           args:
           - apply
           - -f

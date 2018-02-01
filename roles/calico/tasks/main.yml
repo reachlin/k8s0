@@ -1,5 +1,23 @@
 ---
 
+- name: "Copy calico images"
+  copy:
+    src: "{{ playbook_dir }}/images/{{ item }}.tar"
+    dest: "{{ stage_dir }}/{{ item }}.tar"
+  with_items:
+    - cni
+    - ctl
+    - node
+    - kube-policy-controller
+
+- name: "Import calico images"
+  command: "docker load --input {{ stage_dir }}/{{ item }}.tar"
+  with_items:
+    - cni
+    - ctl
+    - node
+    - kube-policy-controller
+
 - name: "Create manifest yml"
   template:
     src: "{{ item }}.j2"
