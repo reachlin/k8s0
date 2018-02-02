@@ -6,3 +6,12 @@ images:
   - { url: "quay.io/calico/cni:v1.5.6", name: "cni"}
   - { url: "quay.io/calico/kube-policy-controller:v0.5.2", name: "kube-policy-controller"}
   - { url: "quay.io/calico/ctl:v1.0.2", name: "ctl"}
+
+images_cn:
+  - { url: "registry.cn-hangzhou.aliyuncs.com/k8s0/etcd:v3.2.15", name: "etcd"}
+  - { url: "registry.cn-hangzhou.aliyuncs.com/k8s0/hyperkube:v1.8.4", name: "hyperkube"}
+  - { url: "registry.cn-hangzhou.aliyuncs.com/k8s0/pause-amd64:3.0", name: "pause"}
+  - { url: "quay.io/calico/node:v1.0.2", name: "node"}
+  - { url: "quay.io/calico/cni:v1.5.6", name: "cni"}
+  - { url: "quay.io/calico/kube-policy-controller:v0.5.2", name: "kube-policy-controller"}
+  - { url: "quay.io/calico/ctl:v1.0.2", name: "ctl"}
