@@ -31,6 +31,7 @@ For now, only support ubuntu >=14.04 with docker and ansible installed.
 
 ### Deploy using Vagrant
 Use vagrant `vagrant up` in the source root folder.
+P.S. for Chinese users, you have to use `VAGRANT_VAGRANTFILE=Vagrantfile.cn vagrant up`
 
 ### Deploy on Travis
 Check .travis.yml for more details.
@@ -39,7 +40,7 @@ Check .travis.yml for more details.
 ```
 # P.S., deploy to localhost has some issue on calico, pls use single host if you want a functional network.
 # pull images and put into ./images folder
-ansible-playbook -i inventory/local images.yml
+ansible-playbook -i inventory/local images.yml # for China, add: --extra-vars "china=True"
 
 # start kubernetes on localhost
 ansible-playbook -i inventory/local site.yml
@@ -51,7 +52,7 @@ ansible-playbook -i inventory/local site.yml
 https://github.com/reachlin/k8s0/blob/master/inventory/single/inventory
 
 # pull images and put into ./images folder
-ansible-playbook -i inventory/single images.yml
+ansible-playbook -i inventory/single images.yml # for China, add: --extra-vars "china=True"
 
 # start kubernetes on localhost
 ansible-playbook -i inventory/single site.yml
@@ -62,7 +63,7 @@ ansible-playbook -i inventory/single site.yml
 https://github.com/reachlin/k8s0/blob/master/inventory/multi/inventory
 
 # pull images and put into ./images folder
-ansible-playbook -i inventory/multi images.yml
+ansible-playbook -i inventory/multi images.yml # for China, add: --extra-vars "china=True"
 
 # start kubernetes on localhost
 ansible-playbook -i inventory/multi site.yml

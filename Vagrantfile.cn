@@ -86,7 +86,7 @@ Vagrant.configure("2") do |config|
     export ANSIBLE_HOST_KEY_CHECKING=False
     ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-    ansible-playbook -i /vagrant/inventory/single /vagrant/images.yml
+    ansible-playbook -i /vagrant/inventory/single --extra-vars "china=True" /vagrant/images.yml
     ansible-playbook -i /vagrant/inventory/single /vagrant/site.yml
   SHELL
 end
