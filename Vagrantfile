@@ -82,6 +82,7 @@ Vagrant.configure("2") do |config|
 
   # vagrant ansible provisioner seems not working
   config.vm.provision "shell", inline: <<-SHELL
+    export ANSIBLE_HOST_KEY_CHECKING=False
     ansible-playbook -i /vagrant/inventory/single /vagrant/images.yml
     ansible-playbook -i /vagrant/inventory/single /vagrant/site.yml
   SHELL
