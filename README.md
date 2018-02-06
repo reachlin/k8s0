@@ -12,6 +12,8 @@ Addtionally, people use MiniKube mainly for education purposes, but the one gian
 
 One more thing, all components are installed as containers including etcd, kubelet, calico, ...
 
+[WATCH DEMO VIDEO](https://youtu.be/umIBCQXCcvw)
+
 **********************
 
 Current status: installed etcd, kubelet, api server, controller, scheduler, proxy, and calico as network plugin.
