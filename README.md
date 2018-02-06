@@ -2,6 +2,8 @@
 
 It's a minimal kubernetes installation on a fixed configuration.
 
+[WATCH DEMO VIDEO](https://youtu.be/umIBCQXCcvw)
+
 But *WHY* ? Many people told me there's alreday [MiniKube](https://kubernetes.io/docs/getting-started-guides/minikube/). Unlike MiniKube, which is a layer of golang code wrapped around the real hyperkube, k8s0 uses the exact hyperkube image. It's more like a minimal version of [Kargo](https://github.com/kubernetes-incubator/kargo), but with the capability to run on Travis.
 
 Another advantage of k8s0 is we have a step of pulling all necessary images before actual installation. This is very helpful if you are not able to access the internet during the installation, for example, behind the company's firewall, or in some "evil countries" where all google sites are banned. The solution is run the pull image step on a computer with internet connection. After you run `images.yml`, all images will be copied into `images` folder. Then you can copy these tar files to the isolated env. and run the rest installation.
@@ -11,8 +13,6 @@ So the user can try this on local host or VM, or use it on Travis for kubernetes
 Addtionally, people use MiniKube mainly for education purposes, but the one giant piece golang code of MiniKube makes it difficult to understand how k8s is installed and how each component interacts. Within k8s0, each installation step is nicely organized as `role` of ansible script. It is very straight-forward to follow.
 
 One more thing, all components are installed as containers including etcd, kubelet, calico, ...
-
-[WATCH DEMO VIDEO](https://youtu.be/umIBCQXCcvw)
 
 **********************
 
