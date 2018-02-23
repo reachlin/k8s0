@@ -1,0 +1,8 @@
+---
+
+- hosts: k8s-node
+  roles:
+    - role: check
+    - role: k8s
+    - role: kubelet
+    - role: proxy

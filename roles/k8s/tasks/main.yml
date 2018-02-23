@@ -38,3 +38,10 @@
 
 - name: "Copy kubectl from hyperkube container"
   command: "docker run --rm -v /usr/local/bin:/systembindir hyperkube /bin/cp /hyperkube /systembindir/kubectl"
+
+- name: "fix kubectl config"
+  become: true
+  file:
+    src: "{{ kubelet_config_dir }}"
+    dest: /etc/kubernetes
+    state: link

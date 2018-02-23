@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  config.vm.define "master" do |master|
+    master.vm.box = "ubuntu/xenial64"
+    master.vm.network "private_network", ip: "192.168.99.100"
+    master.vm.provision "shell", inline: <<-SHELL
+      apt-get update
+      apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+      apt-key fingerprint 0EBFCD88
+      add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      apt-get update
+      apt-get install -y docker-ce
+      apt-add-repository ppa:ansible/ansible
+      apt-get update
+      apt-get install -y ansible
+      usermod -aG docker ubuntu
+      export ANSIBLE_HOST_KEY_CHECKING=False
+      ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
+      cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      ansible-playbook -i /vagrant/inventory/single --extra-vars "china=True" /vagrant/images.yml
+      ansible-playbook -i /vagrant/inventory/single /vagrant/site.yml
+    SHELL
+  end
+
+  config.vm.define "worker" do |worker|
+    worker.vm.box = "ubuntu/xenial64"
+    worker.vm.network "private_network", ip: "192.168.99.201"
+    worker.vm.provision "shell", inline: <<-SHELL
+      apt-get update
+      apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+      apt-key fingerprint 0EBFCD88
+      add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      apt-get update
+      apt-get install -y docker-ce
+      apt-add-repository ppa:ansible/ansible
+      apt-get update
+      apt-get install -y ansible
+      usermod -aG docker ubuntu
+      export ANSIBLE_HOST_KEY_CHECKING=False
+      ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
+      cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      ansible-playbook -i /vagrant/inventory/multi --extra-vars "china=True" /vagrant/images.yml
+      ansible-playbook -i /vagrant/inventory/multi /vagrant/worker.yml
+    SHELL
+  end
+end
