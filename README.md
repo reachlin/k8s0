@@ -33,6 +33,8 @@ For now, only support ubuntu >=14.04 with docker and ansible installed.
 Use vagrant `vagrant up` in the source root folder.
 P.S. for Chinese users, you have to use `VAGRANT_VAGRANTFILE=Vagrantfile.cn vagrant up`
 
+There's also a sample vagrant file for multiple nodes, one master and one worker node. Its name is `Vagrantfile.multi`.
+
 ### Deploy on Travis
 Check .travis.yml for more details.
 
@@ -69,13 +71,19 @@ ansible-playbook -i inventory/multi images.yml # for China, add: --extra-vars "c
 ansible-playbook -i inventory/multi site.yml
 ```
 
+If you want to add a new worker node, please checkout the `worker.yml`. It's also used in `Vagrantfile.multi`.
+
+P.S, to use `kubectl` on a worker node, export env for the configure file: `export KUBECONFIG=/etc/kubernetes/kubelet-config.yml`.
+
 ## Features
 
 * Minimal kubernetes on travis for DevOps.
 
 * Include a local copy of all images, so kubernetes can be deployed without an internet connection.
 
-* All k8s components running as containers
+* All k8s components running as containers.
+
+* Support multiple nodes!
 
 ## Dev. Notes
 
